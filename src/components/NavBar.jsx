@@ -1,8 +1,9 @@
 import { User2 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
+  const [visible,setVisible]=useState(false);
   return (
     <>
       <div className="h-[4rem] w-screen flex justify-center items-center bg-slate-800">
@@ -21,7 +22,7 @@ const NavBar = () => {
               <li className="bg-slate-200 p-2 rounded-lg hover:bg-green-600">
                 <Link to="/contact">Contacts</Link>
               </li>
-              <div className=" flex justify-end items-center text-blue-50 hover:text-green-500">
+              <div className=" flex justify-end items-center text-blue-50 hover:text-green-500" onClick={()=>setVisible(true)}>
               <User2 className=" h-10 w-10 flex bg-slate-600 p-2 rounded-lg" />
               <p> &#8592;login</p>
               </div>
@@ -29,8 +30,27 @@ const NavBar = () => {
         </div>
         </div>
       </div>
-    </>
-  );
+      {
+        visible &&(
+          
+          <div className=" absolute flex justify-center items-center h-screen w-screen ">
+            <div className="  flex justify-center  top-0  h-[40%] w-[30%] bg-yellow-600 z-50 rounded-lg" >
+
+          <div className="p-6 w-full h-full flex flex-col justify-center items-center">
+            <p className="text-white text-xl">Login Form</p>
+            <form>
+              <input type="text" placeholder="Username" className="w-full p-2 mt-4 rounded-lg" required />
+              <input type="password" placeholder="Password" className="w-full p-2 mt-4 rounded-lg" required/>
+              <button className="w-full p-2 mt-4 rounded-lg bg-green-500 text-white">Login</button>
+              <button className="w-full p-2 mt-4 rounded-lg bg-red-600 text-white" onClick={()=>setVisible(!visible)}>cancel</button>
+            </form>
+            </div>
+        </div>
+        </div>
+      
+    )}
+    </>     
+  )
 };
 
 export default NavBar;

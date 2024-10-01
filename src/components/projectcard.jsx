@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { FiEdit2 } from "react-icons/fi";
+import { deleteProject ,editproject } from "../services/api";
 import { IoTrashBinSharp } from "react-icons/io5";
 // import { useState } from "react";
 //   {
@@ -12,11 +13,11 @@ import { IoTrashBinSharp } from "react-icons/io5";
 //     "id": "1"
 //   }
 const projectcard = ({ title, desc, cover, id, link, kid, fetchprojects }) => {
-  const [titleState, setTitleState] = useState(null);
-  const [descState, setDescState] = useState(null);
-  const [coverState, setCoverState] = useState(null);
-  const [linkState, setLinkState] = useState(null);
-  const [visibleState, setVisibleState] = useState(null);
+  const [titleState, setTitleState] = useState(title);
+  const [descState, setDescState] = useState(desc);
+  const [coverState, setCoverState] = useState(cover);
+  const [linkState, setLinkState] = useState(link);
+  const [visibleState, setVisibleState] = useState(false);
 
   const handleEdit = async (e) => {
     e.preventDefault();
@@ -33,12 +34,28 @@ const projectcard = ({ title, desc, cover, id, link, kid, fetchprojects }) => {
       if (response.status === 200) {
         console.log("Updated");
       }
-      fetchprojects;
+      fetchprojects();
     } catch (error) {
       console.log("error");
     }
     setVisibleState(false);
   };
+
+const handledelete=async(id)=>{
+  try {
+    const response = await deleteProject(id);
+    console.log(response.status);
+    if (response.status === 200) {
+      console.log("Deleted");
+      fetchprojects()
+    }
+    fetchprojects();
+  } catch (error) {
+    window.alert(error);
+    console.log("error");
+  }
+}
+
   const [isExpanded, setIsExpanded] = useState(false);
 
     // Function to toggle the expanded state
@@ -69,10 +86,11 @@ const projectcard = ({ title, desc, cover, id, link, kid, fetchprojects }) => {
           >
             {desc}
           </div>
+
           <div className=" w-[100%] flex justify-end items-center gap-2 mt-auto">
             <button
               onClick={toggleExpansion}
-              className="text-white text-blue-400 mx-4 "
+              className="text-white mx-4 "
             >
               {isExpanded ? "Read Less..." : "Read More.."}
             </button>
@@ -86,39 +104,45 @@ const projectcard = ({ title, desc, cover, id, link, kid, fetchprojects }) => {
             >
               <FaGithub className="text-rounded-xl m-2 text-4xl" />
             </a>
-            <FiEdit2 className="text-rounded-xl m-2 text-4xl" onClick={()=>setTitleState(true)} />
-            <IoTrashBinSharp  className="text-rounded-xl m-2 text-4xl"/>
+            <FiEdit2 className="text-rounded-xl m-2 text-4xl" onClick={()=>setVisibleState(true)} />
+            <IoTrashBinSharp  className="text-rounded-xl m-2 text-4xl " onClick={()=>{handledelete(id)}}/>
+           <p style={{ WebkitTextStroke: '1px gray', WebkitTextFillColor: 'transparent' }} className="text-5xl font-bold self-end  px-4 w-[25%]">
+                        {id}
+                    </p>
           </div>
         </div>
       </div>
  {
      
      visibleState && (
-         <div className="flex justify-center items-center w-[300px] h-[200px] bg-black opacity-50 absolute top-0 left-0 z-50">
-          <form onSubmit={handleEdit}>
+        <div className="h-screen w-screen flex justify-center items-center top-0 left-0 z-50 absolute" >
+         <div className="flex justify-center items-center w-[300px] h-[300px] bg-yellow-400 border-yellow-600 border-2  text-black top-0 left-0">
+          <form className=" flex flex-col justify-center items-center gap-4" onSubmit={handleEdit}>
             <input
               type="text"
-              value={titleState || title}
+              value={titleState }
               onChange={(e) => setTitleState(e.target.value)}
               placeholder="Enter new title"
+          
               />
             <input
               type="text"
-              value={descState || desc}
+              value={descState }
               onChange={(e) => setDescState(e.target.value)}
               placeholder="Enter new description"
+              required
               />
             <input
               type="text"
-              value={coverState || cover}
+              value={coverState }
               onChange={(e) => setCoverState(e.target.value)}
               placeholder="Enter new cover image url"
+              required
               />
             <input
               type="text"
-              value={linkState || link}
-              onChange={(e) => setLink
-                (e.target.value)}
+              value={linkState}
+              onChange={(e) => setLinkState(e.target.value)}
                 placeholder="Enter new link"
                 
                 />
@@ -126,6 +150,7 @@ const projectcard = ({ title, desc, cover, id, link, kid, fetchprojects }) => {
             <button onClick={()=>setVisibleState(false)}>Cancel</button>
             
           </form>   
+          </div>
           </div>
 )}
 </>

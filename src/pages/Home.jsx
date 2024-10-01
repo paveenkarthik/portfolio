@@ -8,7 +8,7 @@ import ProfilePic from '../img/profile.png'
 const Home = () => {
   return (
     <>
-    <div className='w-screen h-screen bg-yellow-300 flex justify-center items-center flex-wrap'>
+    <div className='w-screen  bg-yellow-300 flex justify-center items-center flex-wrap'>
       <div className='w-[90%]  border-2 rounded-lg  bg-yellow-50 border-black shadow-lg flex justify-center items-center flex-row flex-wrap'>
         <div className=' flex text-justify justify-center flex-col w-[70%] '>
           <h1 className='flex my-9 ml-9 text-4xl font-bold justify-center items-center'>HEY &rarr; I AM PAVEEN KARTHIK S</h1>

@@ -147,13 +147,13 @@ const Projects = () => {
   return (
 
     <>
-      <div className="flex justify-center items-center h-[100vh] w-screen bg-yellow-300 flex-wrap gap-5 text-white">
+      <div className="flex justify-center items-center  w-screen bg-yellow-300 flex-wrap gap-5 text-white">
         <div className="w-[100%] flex justify-end mx-5 my-4">
         <AddComponent fetchprojects={fetchprojects} className="w-[100%]"/>
 
         </div>
         {projectdata.map((project,index) => (
-          <ProjectCard title={project.title} desc={project.desc} cover={project.coverimg} link={project.link} fetchprojects={fetchprojects} />
+          <ProjectCard title={project.title} desc={project.desc} id={project.id} cover={project.coverimg} link={project.link} fetchprojects={fetchprojects} />
         ))}
       </div>
     </>

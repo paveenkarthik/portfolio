@@ -48,7 +48,7 @@ const AddComponenet = ({ fetchprojects }) => {
         onClick={() => 
            setVisibleState(true)
         }
-        className="flex justify-center items-center text-white bg-purple-500 p-1 rounded-sm"
+        className="flex   text-white  bg-slate-800 rounded-lg"
       >
         <MdOutlineNoteAdd className="text-rounded-xl m-2 text-4xl" />
       </button>

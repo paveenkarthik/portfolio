@@ -107,58 +107,140 @@ import React from "react";
 //  export default Projects;
 
 
-import { useEffect, useState } from "react"
-import { getProjects } from "../services/api"
-import AddComponent from "../components/AddComponenet"
-// import { toast, Toaster } from "sonner"
-import ProjectCard from "../components/projectcard"
-import { MessageCircleWarning } from "lucide-react"
+// import { useEffect, useState } from "react"
+// import { getProjects } from "../services/api"
+// import AddComponent from "../components/AddComponenet"
+// // import { toast, Toaster } from "sonner"
+// import ProjectCard from "../components/projectcard"
+// import { MessageCircleWarning } from "lucide-react"
+
+// const Projects = () => {
+//   const [projectdata, setProjectdata] = useState([])
+//   // Projects.defaultProps = {
+//   //   projectdata: [],
+//   // };
+//   const fetchprojects = async () => {
+//     // const {}
+//     try {
+//       const { data } = await getProjects()
+//       console.log(data)
+//       setProjectdata(data)
+//     } catch (error) {
+//       console.log(error);
+//       // toast('Error', {
+//       //   className: 'bg-gradient-to-r from-yellow-500 to-amber-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+//       //   icon: <MessageCircleWarning />,
+//       // });
+//     }
+//   }
+
+//   // const localdata = localStorage.getItem("userEmail")
+//   // console.log(localdata)
+
+//   useEffect(() => {
+//     fetchprojects()
+//   }, [])
+//   if (!projectdata || projectdata.length === 0) {
+//     return (
+//       <div className="w-full h-[10%] flex justify-center items-center">
+//         <AddComponent />
+//       </div>
+//     )
+//   }
+//   return (
+
+//     <>
+//       <div className="flex justify-center items-center  w-screen bg-yellow-300 flex-wrap gap-5 text-white">
+//         <div className="w-[100%] flex justify-end mx-5 my-4">
+//         <AddComponent fetchprojects={fetchprojects} className="w-[100%]"/>
+
+//         </div>
+//         {projectdata.map((project) => (
+//           <ProjectCard title={project.title} desc={project.desc} id={project.id} cover={project.coverimg} link={project.link} fetchprojects={fetchprojects} />
+//         ))}
+//       </div>
+//     </>
+//   )
+// }
+
+
+// export default Projects
+
+
+
+import { useEffect, useState } from "react";
+import { getProjects } from "../services/api";
+import AddComponent from "../components/AddComponenet";
+import ProjectCard from "../components/projectcard";
+// import {handlecheck} from "../components/NavBar"
 
 const Projects = () => {
-  const [projectdata, setProjectdata] = useState(null)
+  const [projectdata, setProjectdata] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
+
   const fetchprojects = async () => {
-    // const {}
     try {
-      const { data } = await getProjects()
-      console.log(data)
-      setProjectdata(data)
+      const { data } = await getProjects();
+      if (Array.isArray(data)) {
+        setProjectdata(data); // Set project data only if it's an array
+      } else {
+        console.log("Data fetched is not an array:", data);
+      }
     } catch (error) {
       console.log(error);
-      // toast('Error', {
-      //   className: 'bg-gradient-to-r from-yellow-500 to-amber-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
-      //   icon: <MessageCircleWarning />,
-      // });
+    } finally {
+      setIsLoading(false); // Stop loading after fetch completes
     }
-  }
-
-  // const localdata = localStorage.getItem("userEmail")
-  // console.log(localdata)
+  };
 
   useEffect(() => {
-    fetchprojects()
-  }, [])
-  if (!projectdata || projectdata.length === 0) {
+    fetchprojects();
+  }, []);
+
+  // Loading state
+  if (isLoading) {
     return (
       <div className="w-full h-[10%] flex justify-center items-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  // Empty state
+  if (!projectdata || projectdata.length === 0) {
+    return (
+      <>
+      
+      <div className="w-full flex justify-center items-center">
         <AddComponent />
       </div>
-    )
+     
+      </>
+    );
   }
+
   return (
-
     <>
-      <div className="flex justify-center items-center  w-screen bg-yellow-300 flex-wrap gap-5 text-white">
-        <div className="w-[100%] flex justify-end mx-5 my-4">
-        <AddComponent fetchprojects={fetchprojects} className="w-[100%]"/>
-
+      <div className="flex justify-center items-center w-screen h-screen flex-wrap  bg-gray-500 ">
+        <div className="w-[100%] flex justify-end mx-5 ">
+          <AddComponent fetchprojects={fetchprojects} className="w-[100%]" />
         </div>
+      <div className="flex justify-center items-center w-screen flex-wrap gap-2 text-white">
         {projectdata.map((project,index) => (
-          <ProjectCard title={project.title} desc={project.desc} id={project.id} cover={project.coverimg} link={project.link} fetchprojects={fetchprojects} />
+          <ProjectCard
+            key={index} // Make sure to add a key here
+            title={project.title}
+            desc={project.desc}
+            id={project._id}
+            cover={project.coverimg}
+            link={project.link}
+            fetchprojects={fetchprojects}
+          />
         ))}
       </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-
-export default Projects
+export default Projects;

@@ -6,7 +6,7 @@ import viteLogo from '/vite.svg'
 import Navbar from './components/NavBar'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
-import Contact from './pages/Contact'
+import Contact from './pages/contact'
 import './index.css';
 import WebLayouts from './layouts/WebLayouts'
 

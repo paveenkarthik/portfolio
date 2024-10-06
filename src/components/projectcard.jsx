@@ -12,7 +12,7 @@ import { IoTrashBinSharp } from "react-icons/io5";
 //     "link": "link 1",
 //     "id": "1"
 //   }
-const projectcard = ({ title, desc, cover, id, link, kid, fetchprojects }) => {
+const projectcard = ({ title, desc, cover, id, link, key, fetchprojects }) => {
   const [titleState, setTitleState] = useState(title);
   const [descState, setDescState] = useState(desc);
   const [coverState, setCoverState] = useState(cover);
@@ -64,9 +64,9 @@ const handledelete=async(id)=>{
     };
   return (
     <>
-      <div className="items-center gap-3 p-4 bg-yellow-500 rounded-xl shadow-2xl">
+      <div className="flex  items-center gap-3 p-4 bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-slate-800 via-slate-500 to-slate-800 border-black border-2 rounded-xl shadow-2xl">
         <div
-          className={`service-card w-[400px] bg-black shadow-xl cursor-pointer snap-start shrink-0 flex flex-col items-start rounded-xl text-yellow-50 transition-all duration-300 ${
+          className={`service-card w-[400px] bg-slate-800 shadow-xl cursor-pointer snap-start shrink-0 flex flex-col items-start rounded-xl text-yellow-50 transition-all duration-300 ${
             isExpanded ? "h-auto" : "h-[400px]"
           }`}
         >
@@ -107,7 +107,7 @@ const handledelete=async(id)=>{
             <FiEdit2 className="text-rounded-xl m-2 text-4xl" onClick={()=>setVisibleState(true)} />
             <IoTrashBinSharp  className="text-rounded-xl m-2 text-4xl " onClick={()=>{handledelete(id)}}/>
            <p style={{ WebkitTextStroke: '1px gray', WebkitTextFillColor: 'transparent' }} className="text-5xl font-bold self-end  px-4 w-[25%]">
-                        {id}
+                        {key}
                     </p>
           </div>
         </div>

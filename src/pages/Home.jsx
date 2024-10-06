@@ -8,8 +8,9 @@ import ProfilePic from '../img/profile.png'
 const Home = () => {
   return (
     <>
-    <div className='w-screen  bg-yellow-300 flex justify-center items-center flex-wrap'>
-      <div className='w-[90%]  border-2 rounded-lg  bg-yellow-50 border-black shadow-lg flex justify-center items-center flex-row flex-wrap'>
+    <div className='w-screen h-screen flex justify-center items-center flex-wrap bg-gray-500 '>
+    <div className='w-screen   flex justify-center items-center flex-wrap'>
+      <div className='w-[90%]  border-2 rounded-lg bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-slate-800 via-slate-500 to-slate-800 border-black shadow-lg flex justify-center items-center flex-row flex-wrap'>
         <div className=' flex text-justify justify-center flex-col w-[70%] '>
           <h1 className='flex my-9 ml-9 text-4xl font-bold justify-center items-center'>HEY &rarr; I AM PAVEEN KARTHIK S</h1>
           <p>I am a student at Sri Shakthi Institute of Engineering and Technology
@@ -29,11 +30,11 @@ const Home = () => {
                </div>
         </div>
         <div className='p-8  flex justify-center items-center shadow-sm '>
-          <img className='h-[25rem] rounded-full shadow-sm ' src={ProfilePic} alt='placeholder' />
+          <img className='h-[20rem] rounded-full shadow-sm' src={ProfilePic} alt='placeholder' />
           </div>
        
       </div>
-
+      </div>
     </div>
     </>
   )

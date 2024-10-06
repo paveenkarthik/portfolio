@@ -172,12 +172,12 @@ import { useEffect, useState } from "react";
 import { getProjects } from "../services/api";
 import AddComponent from "../components/AddComponenet";
 import ProjectCard from "../components/projectcard";
-// import {handlecheck} from "../components/NavBar"
+import {handlecheck} from "../components/NavBar"
 
 const Projects = () => {
   const [projectdata, setProjectdata] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Add loading state
-
+  const [combovisible,setcombovisible] = useState(true);
   const fetchprojects = async () => {
     try {
       const { data } = await getProjects();
@@ -205,7 +205,6 @@ const Projects = () => {
       </div>
     );
   }
-
   // Empty state
   if (!projectdata || projectdata.length === 0) {
     return (
@@ -218,9 +217,13 @@ const Projects = () => {
       </>
     );
   }
+  
+  {handlecheck}
+  if(combovisible) {
 
-  return (
-    <>
+    return (
+      <>
+   
       <div className="flex justify-center items-center w-screen h-screen flex-wrap  bg-gray-500 ">
         <div className="w-[100%] flex justify-end mx-5 ">
           <AddComponent fetchprojects={fetchprojects} className="w-[100%]" />
@@ -228,19 +231,20 @@ const Projects = () => {
       <div className="flex justify-center items-center w-screen flex-wrap gap-2 text-white">
         {projectdata.map((project,index) => (
           <ProjectCard
-            key={index} // Make sure to add a key here
-            title={project.title}
-            desc={project.desc}
-            id={project._id}
-            cover={project.coverimg}
-            link={project.link}
-            fetchprojects={fetchprojects}
+          key={index} // Make sure to add a key here
+          title={project.title}
+          desc={project.desc}
+          id={project._id}
+          cover={project.coverimg}
+          link={project.link}
+          fetchprojects={fetchprojects}
           />
         ))}
       </div>
       </div>
     </>
   );
-};
+}
+}
 
 export default Projects;

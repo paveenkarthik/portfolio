@@ -12,7 +12,7 @@ import { IoTrashBinSharp } from "react-icons/io5";
 //     "link": "link 1",
 //     "id": "1"
 //   }
-const projectcard = ({ title, desc, cover, id, link, key, fetchprojects }) => {
+const projectcard = ({ title, desc, cover, id, link, fetchprojects }) => {
   const [titleState, setTitleState] = useState(title);
   const [descState, setDescState] = useState(desc);
   const [coverState, setCoverState] = useState(cover);
@@ -106,9 +106,9 @@ const handledelete=async(id)=>{
             </a>
             <FiEdit2 className="text-rounded-xl m-2 text-4xl" onClick={()=>setVisibleState(true)} />
             <IoTrashBinSharp  className="text-rounded-xl m-2 text-4xl " onClick={()=>{handledelete(id)}}/>
-           <p style={{ WebkitTextStroke: '1px gray', WebkitTextFillColor: 'transparent' }} className="text-5xl font-bold self-end  px-4 w-[25%]">
+           {/* <p style={{ WebkitTextStroke: '1px gray', WebkitTextFillColor: 'transparent' }} className="text-5xl font-bold self-end  px-4 w-[25%]">
                         {key}
-                    </p>
+                    </p> */}
           </div>
         </div>
       </div>

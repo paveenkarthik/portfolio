@@ -2,17 +2,22 @@ import { Book, User2 } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
+const handlecheck= () => {
+  const [combovisible,setcombovisible] = useState(false);
+  if(email.current.value===auctualEmail && pass.current.password===password){
+    setcombovisible(true);
+  }
+  else{
+    alert("Invalid credentials");
+  }
+};
+
 const NavBar = () => {
-  var handlecheck =  (e) => {
-    e.preventDefault();
-    const emailText = email.current.value;
-    const passText = pass.current.value;
-   
-    window.alert(emailText);
-  };
   const [visible, setVisible] = useState(false);
   const email = useRef(null);
   const pass = useRef(null);
+  const auctualEmail="paveensenthil15@gmail.com";
+  const password="12345";
   return (
     <>
       <div className="h-[4rem] w-screen flex justify-center items-center bg-gradient-to-r from-slate-800 to-slate-600 flex-wrap ">
@@ -65,7 +70,7 @@ const NavBar = () => {
                   ref={pass}
                   required
                 />
-                <button className="w-full p-2 mt-4 rounded-lg bg-green-500 text-white border-2 border-black">
+                <button className="w-full p-2 mt-4 rounded-lg bg-green-500 text-white border-2 border-black " onClick={handlecheck}>
                   Login
                 </button>
                 <button
@@ -84,4 +89,5 @@ const NavBar = () => {
 };
 
 export default NavBar;
-// export {handlecheck};
+export {handlecheck};
+
